@@ -1,7 +1,6 @@
-import { FC, useEffect, useState } from "react";
-import { Box, Button, FormControl, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { FC } from "react";
+import { Box, Button, SelectChangeEvent, TextField } from "@mui/material";
 import { Div } from "components/Global";
-import { makeStyles } from '@mui/styles';
 import { styled } from "@mui/material/styles";
 import React from "react";
 
@@ -16,6 +15,14 @@ const RatioBar = styled((props: any) => <Box {...props} />)`
     display: flex;
     justify-content: center;
     align-items: center;
+`
+
+const CustomSelect = styled((props: any) => <select {...props} />)`
+    border: 1px solid white;
+    padding: 1.5vw;
+    border-radius: 4px;
+    color: white;
+    background: transparent;
 `
 
 const WhiteTextField = styled(TextField)({
@@ -41,38 +48,18 @@ const WhiteTextField = styled(TextField)({
     },
 });
 
-const useStyles = makeStyles({
-    '&: .MuiInputBase': {
-        border: '1px white solid',
-    },
-    select: {
-        '&:before': {
-            border: '1px white solid',
-        },
-        '&:after': {
-            border: '1px white solid',
-        },
-        '&:not(.Mui-disabled):hover::before': {
-            border: '1px white solid',
-        },
-    },
-    icon: {
-        fill: 'white',
-    },
-    root: {
-        color: 'white',
-    },
-})
-
 const ReadyPresale: FC = () => {
 
-    const [age, setAge] = React.useState('');
+    const [coin, setCoin] = React.useState('');
+    const [amount, setAmount] = React.useState('');
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value as string);
+    const handleChange = (event: any) => {
+        setCoin(event.target.value as string);
     };
 
-    const classes = useStyles()
+    const changeTokenAmount = (e: any) => {
+        setAmount(e.target.value);
+    }
 
     return <>
         <Div fsize="48" fw="300" mt="1vw" mb="3vw">PRESALE NOW OPEN!</Div>
@@ -82,30 +69,18 @@ const ReadyPresale: FC = () => {
             <Div>{15}%</Div>
         </RatioBar>
 
-        <Div fsize="60" fw="900" mb="1vw">{3125}</Div>
+        <Div fsize="60" fw="900" mb="1vw">{(Number(amount)/1.8).toFixed(2)}</Div>
         <Div fsize="24" fw="600" mb="1vw">SUBZERO TOKENS</Div>
         <Box display="flex" justifyContent="center" alignItems="center">
             <Div fsize="26" fw="600" mr="1vw">AMOUNT($)</Div>
-            <WhiteTextField id="outlined-basic" variant="outlined" sx={{ mr: '1vw' }} />
-            <FormControl fullWidth className={classes.select} color="success">
-                <Select
-                    value={age}
-                    onChange={handleChange}
-                    className={classes.select}
-                    inputProps={{
-                        classes: {
-                            icon: classes.icon,
-                            root: classes.root,
-                        },
-                    }}
-                >
-                    <MenuItem value={'USDCE'}>USDC.e</MenuItem>
-                    <MenuItem value={'USDC'}>USDC</MenuItem>
-                    <MenuItem value={'USDT'}>USDT</MenuItem>
-                </Select>
-            </FormControl>
+            <WhiteTextField id="outlined-basic" variant="outlined" sx={{ mr: '1vw' }} onChange={changeTokenAmount} value={amount} />
+            <CustomSelect onChange={handleChange} value={coin}>
+                <option value={'USDCE'} style={{background: 'black'}}>USDC.e</option>
+                <option value={'USDC'} style={{background: 'black'}}>USDC</option>
+                <option value={'USDT'} style={{background: 'black'}}>USDT</option>
+            </CustomSelect>
         </Box>
-        <Box color="white"><Button sx={{mt: '2vw', mb: '5vw'}} color="inherit" variant="outlined"><Div fsize="36" fw="600">BUY $SUB TOKENS</Div></Button></Box>
+        <Box color="white"><Button sx={{ mt: '2vw', mb: '5vw' }} color="inherit" variant="outlined"><Div fsize="36" fw="600">BUY $SUB TOKENS</Div></Button></Box>
         <Div fsize="22" fw="300" mb="3vw">THE FIRST TOMB-PEGGED ALGORITHIC STABLECOIN CROSS CHAINE, ON AVALANCHE.</Div>
     </>
 }

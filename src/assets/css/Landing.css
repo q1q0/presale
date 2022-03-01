@@ -13,3 +13,7 @@
 .MuiInputBase-root{
     border: 1px solid white;
 }
+
+.MuiSelect-select{
+    color: white;
+}
