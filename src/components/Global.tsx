@@ -2,8 +2,8 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 
 export const Div = styled((props: any) => <Box {...props} />)`
-  color: ${(props) => (props.color ? props.color : "red")};
-  font-family: Roboto;
+  color: ${(props) => (props.color ? props.color : "white")};
+  font-family: ${(props) => (props.family ? props.family : "Roboto")};
   font-style: normal;
   font-weight: ${(props) => (props.bold === true ? "bold" : (props.fw ? props.fw : "normal"))};
   font-size: ${(props) => {

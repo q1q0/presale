@@ -3,11 +3,25 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Providers from './Providers'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+let theme = createTheme({
+  palette: {
+    primary: {
+      main: '#000000',
+    },
+    secondary: {
+      main: '#edf2ff',
+    },
+  },
+});
 
 ReactDOM.render(
+  <ThemeProvider theme={theme}>
     <Providers>
       <App />
-    </Providers>,
+    </Providers>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 
