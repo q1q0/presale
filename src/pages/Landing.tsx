@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { Div } from "components/Global";
 import logo from "assets/images/logo.png"
 import dao from "assets/images/dao.png"
@@ -13,31 +13,26 @@ import ReadyPresale from "components/ReadyPresale";
 import prop from "assets/images/prop.png"
 import docs from "assets/images/docs.png"
 import discord from "assets/images/discord-link.png"
-
-interface TimeCounterProps {
-    value: string;
-    label: string;
-}
-
-const TimeCounter: FC<TimeCounterProps> = (props: TimeCounterProps) => {
-    return (
-        <Box
-            display="flex"
-            justifyContent="center"
-            mr="1px"
-            alignItems="center"
-        >
-            <Div family="Kanit" fsize="40" fw="600" padding="5px" >
-                {props.value}{props.label}
-            </Div>
-        </Box>
-    );
-};
+import useAuth from "hooks/useAuth"
+import { ConnectorNames } from "../type";
 
 const Landing: FC = () => {
     const [timeover, setTimeover] = useState(false)
+    const { login, account, logout, error } = useAuth();
+
+    useEffect(() => {
+        if (account) console.log(account);
+    }, [account])
+
+    const connectWallet = async () => {
+        // if (account) return;
+        await login(ConnectorNames.Injected);
+    }
 
     return <Box position="relative" minHeight="100vh">
+        <Box position="absolute" zIndex={11} top="50px" right="50px" color="white">
+            <Button variant="outlined" color="inherit" onClick={connectWallet}><Div fsize="30" fw="600">Connect Wallet</Div></Button>
+        </Box>
         <Box className="landing_container" ></Box>
         <Box display={'flex'} py="9vw" alignItems="center" flexDirection="column" zIndex={10} position="relative">
             <Box><img src={logo} alt="logo" style={{ width: '24vw' }} /></Box>
@@ -46,7 +41,7 @@ const Landing: FC = () => {
                     <PreparePresale timeOut={() => { setTimeover(true) }} /> :
                     <ReadyPresale />
             }
-            
+
             <Box display={'flex'} mt="1vw">
                 <Box><img src={prop} alt="" style={{ marginRight: '3vw', width: '3vw' }} /></Box>
                 <Box><img src={docs} alt="" style={{ width: '3vw' }} /></Box>
@@ -66,4 +61,4 @@ const Landing: FC = () => {
     </Box>
 }
 
-export default Landing
+export default Landing;
