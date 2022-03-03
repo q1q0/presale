@@ -27,7 +27,7 @@ interface PreparePresaleProps {
 }
 
 const PreparePresale: FC<PreparePresaleProps> = (props: PreparePresaleProps) => {
-    const [timeLimit, setTimeLimit] = useState(2);
+    const [timeLimit, setTimeLimit] = useState(5);
 
     useEffect(() => {
         const timer = setTimeout(() => {

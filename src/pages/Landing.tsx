@@ -10,8 +10,6 @@ import fantom from "assets/images/fantom.png"
 import "assets/css/Landing.css"
 import PreparePresale from "components/PreparePresale";
 import ReadyPresale from "components/ReadyPresale";
-import prop from "assets/images/prop.png"
-import docs from "assets/images/docs.png"
 import discord from "assets/images/discord-link.png"
 import useAuth from "hooks/useAuth"
 import { ConnectorNames } from "../type";
@@ -41,11 +39,6 @@ const Landing: FC = () => {
                     <PreparePresale timeOut={() => { setTimeover(true) }} /> :
                     <ReadyPresale />
             }
-
-            <Box display={'flex'} mt="1vw">
-                <Box><img src={prop} alt="" style={{ marginRight: '3vw', width: '3vw' }} /></Box>
-                <Box><img src={docs} alt="" style={{ width: '3vw' }} /></Box>
-            </Box>
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" my="3vw">
                 <a href="https://discord.gg/3Ce4BY4Yqs"><img src={discord} alt="" style={{ width: '12vw' }} /></a>
             </Box>
